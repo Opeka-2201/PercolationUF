@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdbool.h>
 #include "UnionFind.h"
 
 typedef struct tree_node_t TreeNode;
@@ -15,10 +14,7 @@ struct union_find_t{
   size_t size;
 };
 
-TreeNode* newNode(size_t,TreeNode*);
-void freeNodeTable(TreeNode**,size_t);
-size_t getIndex(TreeNode*);
-TreeNode* getRoot(TreeNode* node);
+static TreeNode* newNode(size_t,TreeNode*);
 
 UnionFind* ufCreate(size_t n_items){
   UnionFind* unionFind = malloc(sizeof(UnionFind));
@@ -29,7 +25,7 @@ UnionFind* ufCreate(size_t n_items){
   if(nodesTable == NULL)
     abort();
 
-  for(int i = 0; i < (int)n_items ; i++){
+  for(size_t i = 0; i < n_items ; i++){
     nodesTable[i] = newNode(i,NULL);
   }
 
@@ -41,103 +37,72 @@ UnionFind* ufCreate(size_t n_items){
 }
 
 void ufFree(UnionFind* union_find){
-  freeNodeTable(union_find->nodes,union_find->size);
+  for(size_t i = 0; i < union_find->size; i++)
+    free(union_find->nodes[i]);
+
   free(union_find);
 }
 
 ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
-	TreeNode** items_array = union_find->nodes;
-
-	TreeNode* item01 = items_array[item1];
-	TreeNode* item02 = items_array[item2];
-
-	if(item01 == NULL || item02 == NULL)
-		return UF_ERROR;
-
-	TreeNode* root1 = item01;
-	TreeNode* root2 = item02;
-
-	int rank1 = 0;
-	int rank2 = 0;
-
-	while(root1->parent != NULL || root2->parent != NULL){
-		if(root1->parent != NULL){
-		root1 = root1->parent;
-		rank1++;
-		}
-
-		if(root2->parent != NULL){
-		root2 = root2->parent;
-		rank2++;
-		}
-	}
-
-	if(root1==root2){
-		return UF_SAME;
-	}
-
-	union_find->totalTrees -= 1;
-
-	if(rank1 >= rank2){
-		root2->parent = root1;
-		return UF_MERGED;
-	}else{
-		root1->parent = root2;
-		return UF_MERGED;
-	}
-}
-
-/*ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
-  fprintf(stderr, "%zu , %zu\n",item1, item2);
-
   TreeNode** nodes = union_find->nodes;
 
   if(item1 == item2)
     return UF_SAME;
 
-  if(nodes[item1] == NULL || nodes[item2] == NULL)
+  TreeNode* tree1 = nodes[item1];
+  TreeNode* tree2 = nodes[item2];
+
+  if(tree1 == NULL || tree2 == NULL)
     return UF_ERROR;
 
-  fprintf(stderr,"%s\n","SUS");
+  TreeNode* rootTree1 = tree1;
+  TreeNode* rootTree2 = tree2;
+  size_t depthNode1 = 0;
+  size_t depthNode2 = 0;
 
-  size_t indexItem1 = getIndex(nodes[item1]);
-  size_t indexItem2 = getIndex(nodes[item2]);
+  while(rootTree1->parent != NULL || rootTree2->parent != NULL){
+    if(rootTree1->parent != NULL){
+      depthNode1++;
+      rootTree1 = rootTree1->parent;
+    }
 
-  fprintf(stderr, "%s\n", "OH OH");
+    if(rootTree2->parent != NULL){
+      depthNode2++;
+      rootTree2 = rootTree2->parent;
+    }
+  }
 
-  TreeNode* rootItem1 = getRoot(nodes[item1]);
-  TreeNode* rootItem2 = getRoot(nodes[item2]);
-
-  fprintf(stderr,"%s\n","AMOGUS");
-
-  if(rootItem1 == rootItem2)
+  if(rootTree1 == rootTree2)
     return UF_SAME;
 
-  if(indexItem1 <= indexItem2)
-    rootItem1->parent = rootItem2;
+  if(depthNode2 <= depthNode1)
+    rootTree1->parent = rootTree2;
   else
-    rootItem2->parent = rootItem1;
+    rootTree2->parent = rootTree1;
 
   union_find->totalTrees--;
   return UF_MERGED;
-}*/
+}
 
 size_t ufFind(const UnionFind* union_find, size_t item){
-  TreeNode* node = union_find->nodes[item];
-  TreeNode* copy = node;
-  if (copy->parent == copy)
-    return copy->nodeIndex;
+  TreeNode* tree = union_find->nodes[item];
+  if(tree->parent == NULL)
+    return tree->nodeIndex;
+
+  TreeNode* copy = tree;
+
   while(copy->parent != NULL)
     copy = copy->parent;
-  node->parent = copy;
-  return copy->nodeIndex;
+
+  tree->parent = copy;
+  return tree->nodeIndex;
 }
 
 size_t ufComponentsCount(const UnionFind* union_find){
   return union_find->totalTrees;
 }
 
-TreeNode* newNode(size_t nodeIndex, TreeNode* parent){
+static TreeNode* newNode(size_t nodeIndex, TreeNode* parent){
   TreeNode* toReturn = (TreeNode*)malloc(sizeof(TreeNode));
   if(toReturn == NULL)
     abort();
@@ -146,26 +111,4 @@ TreeNode* newNode(size_t nodeIndex, TreeNode* parent){
   toReturn->parent = parent;
 
   return toReturn;
-}
-
-void freeNodeTable(TreeNode** nodesTable, size_t size){
-  for(int i = 0; i < (int)size; i++){
-    free(nodesTable[i]);
-  }
-  free(nodesTable);
-}
-
-size_t getIndex(TreeNode* node){
-  size_t index = 0;
-  while(node->parent != NULL){
-    node = node->parent;
-    index++;
-  }
-  return index;
-}
-
-TreeNode* getRoot(TreeNode* node){
-  while(node->parent != NULL)
-    node = node->parent;
-  return node;
 }
