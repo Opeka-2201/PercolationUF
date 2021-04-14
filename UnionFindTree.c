@@ -21,7 +21,7 @@ UnionFind* ufCreate(size_t n_items){
   if(unionFind == NULL)
     abort();
 
-  TreeNode** nodesTable = (TreeNode**)malloc(n_items*sizeof(TreeNode*));
+  TreeNode** nodesTable = malloc(n_items*sizeof(TreeNode*));
   if(nodesTable == NULL)
     abort();
 
@@ -46,9 +46,6 @@ void ufFree(UnionFind* union_find){
 ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
   TreeNode** nodes = union_find->nodes;
 
-  if(item1 == item2)
-    return UF_SAME;
-
   TreeNode* tree1 = nodes[item1];
   TreeNode* tree2 = nodes[item2];
 
@@ -57,8 +54,8 @@ ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
 
   TreeNode* rootTree1 = tree1;
   TreeNode* rootTree2 = tree2;
-  size_t depthNode1 = 0;
-  size_t depthNode2 = 0;
+  int depthNode1 = 0;
+  int depthNode2 = 0;
 
   while(rootTree1->parent != NULL || rootTree2->parent != NULL){
     if(rootTree1->parent != NULL){
@@ -75,7 +72,7 @@ ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
   if(rootTree1 == rootTree2)
     return UF_SAME;
 
-  if(depthNode2 <= depthNode1)
+  if(depthNode2 < depthNode1)
     rootTree1->parent = rootTree2;
   else
     rootTree2->parent = rootTree1;

@@ -13,7 +13,7 @@ double* thresholdEstimate(size_t N, size_t T)
   double* stats=calloc(3,sizeof(double));
   double* results = calloc(T,sizeof(double));
   double countOpen;
-  for (int i=0; i<(int)T ; i++)
+  for (size_t i = 0; i < T ; i++)
   {
     Percolation* perc = percCreate(N);
     countOpen = 0;
@@ -22,16 +22,13 @@ double* thresholdEstimate(size_t N, size_t T)
       do {
         randRow=rand()%N;
         randCol=rand()%N;
-      } while(percIsCellOpen(perc,randRow,randCol));
+      }while(percIsCellOpen(perc,randRow,randCol));
       percOpenCell(perc,randRow,randCol);
       countOpen=countOpen+1;
       percPercolates(perc);
     }
     stats[1] += countOpen/(double)(N*N);
     results[i]=countOpen/(double)(N*N);
-    //FILE* out = fopen("out.txt","w");
-    //percPrint(perc,out);
-    //fclose(out);
 
     percFree(perc);
 
