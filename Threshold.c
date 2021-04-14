@@ -20,6 +20,7 @@ double* thresholdEstimate(size_t N, size_t T)
     while (percPercolates(perc)!=true)
     {
       do {
+        fprintf(stderr, "%zu\n",i);
         randRow=rand()%N;
         randCol=rand()%N;
       }while(percIsCellOpen(perc,randRow,randCol));
