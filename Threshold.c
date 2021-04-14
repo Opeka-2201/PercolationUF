@@ -15,7 +15,6 @@ double* thresholdEstimate(size_t N, size_t T)
   double countOpen;
   for (int i=0; i<(int)T ; i++)
   {
-    fprintf(stdout,"%s\n","Bonjour la zone 51");
     Percolation* perc = percCreate(N);
     countOpen = 0;
     while (percPercolates(perc)!=true)
@@ -37,7 +36,6 @@ double* thresholdEstimate(size_t N, size_t T)
     percFree(perc);
 
   }
-  fprintf(stderr,"%s\n","Youhou");
   quicksort(results,T);
   stats[0]=results[(int)(0.05*T)];
   stats[1]/=T;

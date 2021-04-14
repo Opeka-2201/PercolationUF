@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "UnionFind.h"
@@ -23,16 +22,13 @@ TreeNode* getRoot(TreeNode* node);
 
 UnionFind* ufCreate(size_t n_items){
   UnionFind* unionFind = malloc(sizeof(UnionFind));
-  if(unionFind == NULL){
-    fprintf(stderr, "Erreur d'allocation de mémoire\n");
+  if(unionFind == NULL)
     abort();
-  }
 
   TreeNode** nodesTable = (TreeNode**)malloc(n_items*sizeof(TreeNode*));
-  if(nodesTable == NULL){
-    fprintf(stderr, "Erreur d'allocation de mémoire\n");
+  if(nodesTable == NULL)
     abort();
-  }
+
   for(int i = 0; i < (int)n_items ; i++){
     nodesTable[i] = newNode(i,NULL);
   }
@@ -143,10 +139,8 @@ size_t ufComponentsCount(const UnionFind* union_find){
 
 TreeNode* newNode(size_t nodeIndex, TreeNode* parent){
   TreeNode* toReturn = (TreeNode*)malloc(sizeof(TreeNode));
-  if(toReturn == NULL){
-    fprintf(stderr, "Erreur d'allocation de mémoire\n");
+  if(toReturn == NULL)
     abort();
-  }
 
   toReturn->nodeIndex = nodeIndex;
   toReturn->parent = parent;
@@ -167,7 +161,6 @@ size_t getIndex(TreeNode* node){
     node = node->parent;
     index++;
   }
-  fprintf(stderr, "%zu\n",index);
   return index;
 }
 

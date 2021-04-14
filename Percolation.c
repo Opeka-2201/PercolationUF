@@ -18,17 +18,14 @@ Percolation* percCreate(size_t n){
 
   UnionFind* unionToStock = ufCreate(n*n);
   for(size_t i = 0 ; i < n ; i++){
-      fprintf(stderr,"%zu\n",i);
       ufUnion(unionToStock,0,i); //On met la premiere ligne dans un ensemble
-      fprintf(stderr,"%zu\n",i);
       ufUnion(unionToStock,n*(n-1),n*(n-1) + i); // On met la derniere ligne dans un ensemble
-      fprintf(stderr,"%zu\n",i);
   }
 
   newPerc->boolMatrix = boolToStock;
   newPerc->unionFind = unionToStock;
   newPerc->size = n;
-  fprintf(stderr,"Aurevoir la zone 51\n");
+
   return newPerc;
 }
 
@@ -51,7 +48,6 @@ void percOpenCell(Percolation *perc, size_t row, size_t col){
   bool** boolMatrix = perc->boolMatrix;
 
   if(row > size-1 || col > size-1){
-    fprintf(stderr, "%s\n","La cellule n est pas dans le domaine (percOpenCell)" );
     return;
   }
 
@@ -72,7 +68,6 @@ void percOpenCell(Percolation *perc, size_t row, size_t col){
 bool percIsCellOpen(const Percolation *perc, size_t row, size_t col){
   size_t size = perc->size;
   if(col > size-1 || row > size-1){
-    fprintf(stderr, "%s\n","La cellule n est pas dans le domaine (percIsCellOpen)" );
     return false;
   }
 
@@ -83,7 +78,6 @@ bool percIsCellFull(const Percolation* perc, size_t row, size_t col){
   size_t size = perc->size;
 
   if(col > size-1 || row > size-1){
-    fprintf(stderr, "%s\n","La cellule n est pas dans le domaine (percIsCellFull)" );
     return false;
   }
 
