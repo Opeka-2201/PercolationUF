@@ -22,7 +22,7 @@ size_t getIndex(TreeNode*);
 TreeNode* getRoot(TreeNode* node);
 
 UnionFind* ufCreate(size_t n_items){
-  UnionFind* UnionFind = malloc(sizeof(UnionFind));
+  UnionFind* UnionFind = malloc(sizeof(UnionFind*));
   if(UnionFind == NULL){
     fprintf(stderr, "Erreur d'allocation de mémoire\n");
     abort();
