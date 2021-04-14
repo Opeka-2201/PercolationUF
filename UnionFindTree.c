@@ -22,8 +22,8 @@ size_t getIndex(TreeNode*);
 TreeNode* getRoot(TreeNode* node);
 
 UnionFind* ufCreate(size_t n_items){
-  UnionFind* UnionFind = malloc(sizeof(UnionFind*));
-  if(UnionFind == NULL){
+  UnionFind* unionFind = malloc(sizeof(UnionFind*));
+  if(unionFind == NULL){
     fprintf(stderr, "Erreur d'allocation de mémoire\n");
     abort();
   }
@@ -37,11 +37,11 @@ UnionFind* ufCreate(size_t n_items){
     nodesTable[i] = newNode(i,NULL);
   }
 
-  UnionFind->nodes = nodesTable;
-  UnionFind->totalTrees = n_items;
-  UnionFind->size = n_items;
+  unionFind->nodes = nodesTable;
+  unionFind->totalTrees = n_items;
+  unionFind->size = n_items;
 
-  return UnionFind;
+  return unionFind;
 }
 
 void ufFree(UnionFind* union_find){
