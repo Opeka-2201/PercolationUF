@@ -28,7 +28,7 @@ Percolation* percCreate(size_t n){
   newPerc->boolMatrix = boolToStock;
   newPerc->unionFind = unionToStock;
   newPerc->size = n;
-
+  fprintf(stderr,"Aurevoir la zone 51\n");
   return newPerc;
 }
 

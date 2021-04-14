@@ -65,7 +65,6 @@ ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
 	int rank2 = 0;
 
 	while(root1->parent != NULL || root2->parent != NULL){
-
 		if(root1->parent != NULL){
 		root1 = root1->parent;
 		rank1++;
