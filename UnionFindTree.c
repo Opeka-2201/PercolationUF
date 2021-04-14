@@ -50,16 +50,16 @@ void ufFree(UnionFind* union_find){
 }
 
 ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
-	Item** items_array = union_find->items;
+	TreeNode** items_array = union_find->nodes;
 
-	Item* item01 = items_array[item1];
-	Item* item02 = items_array[item2];
+	TreeNode* item01 = items_array[item1];
+	TreeNode* item02 = items_array[item2];
 
 	if(item01 == NULL || item02 == NULL)
 		return UF_ERROR;
 
-	Item* root1 = item01;
-	Item* root2 = item02;
+	TreeNode* root1 = item01;
+	TreeNode* root2 = item02;
 
 	int rank1 = 0;
 	int rank2 = 0;
@@ -81,7 +81,7 @@ ufStatus ufUnion(UnionFind* union_find, size_t item1, size_t item2){
 		return UF_SAME;
 	}
 
-	union_find->nbTrees -= 1;
+	union_find->totalTrees -= 1;
 
 	if(rank1 >= rank2){
 		root2->parent = root1;
