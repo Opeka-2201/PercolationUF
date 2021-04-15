@@ -22,7 +22,7 @@ double* thresholdEstimate(size_t N, size_t T)
         randRow = rand()%N;
         randCol = rand()%N;
       }while(percIsCellOpen(perc,randRow,randCol));
-
+    
       percOpenCell(perc,randRow,randCol);
       countOpen++;
       percPercolates(perc);
