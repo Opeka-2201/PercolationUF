@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "UnionFind.h"
 
 typedef struct node_t Node;
@@ -30,18 +28,14 @@ struct union_find_t{
 
 UnionFind* ufCreate(size_t n_items){
   UnionFind* unionFind = malloc(sizeof(UnionFind));
-  if(unionFind == NULL){
-    fprintf(stderr, "%s\n","Erreur d allocation de mémoire pour l'unionFind (liste)" );
+  if(unionFind == NULL)
     abort();
-  }
 
   Node** nodes = malloc(n_items*sizeof(Node*));
   List** lists = malloc(n_items*sizeof(List*));
 
-  if(nodes == NULL || lists == NULL){
-    fprintf(stderr, "%s\n","Erreur d allocation de mémoire pour les ensembles ou les noeuds (liste)");
+  if(nodes == NULL || lists == NULL)
     abort();
-  }
 
   for(size_t i = 0; i < n_items; i++){
     nodes[i] = nodeCreate(NULL,NULL,i);
@@ -113,10 +107,8 @@ size_t ufComponentsCount(const UnionFind* union_find){
 
 Node* nodeCreate(List* list, Node* next, size_t label){
   Node* toReturn = malloc(sizeof(Node));
-  if(toReturn == NULL){
-    fprintf(stderr, "%s\n","Erreur d allocation de mémoire pour un noeud (liste)" );
+  if(toReturn == NULL)
     abort();
-  }
 
   toReturn->list = list;
   toReturn->next = next;
@@ -127,10 +119,8 @@ Node* nodeCreate(List* list, Node* next, size_t label){
 
 List* listCreate(Node* start, Node* tail, size_t length){
   List* toReturn = malloc(sizeof(List));
-  if(toReturn == NULL){
-    fprintf(stderr, "%s\n","Erreur d allocation de mémoire pour une liste (liste)" );
+  if(toReturn == NULL)
     abort();
-  }
 
   toReturn->start = start;
   toReturn->tail = tail;
