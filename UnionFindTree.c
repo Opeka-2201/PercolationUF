@@ -92,7 +92,7 @@ size_t ufFind(const UnionFind* union_find, size_t item){
     copy = copy->parent;
 
   tree->parent = copy;
-  return tree->nodeIndex;
+  return copy->nodeIndex;
 }
 
 size_t ufComponentsCount(const UnionFind* union_find){
