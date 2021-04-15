@@ -37,6 +37,7 @@ double* thresholdEstimate(size_t N, size_t T)
   stats[0]=results[(int)(0.05*T)];
   stats[1]/=T;
   stats[2]=results[(int)(0.95*T)];
+  free(results);
   return stats;
 }
 
