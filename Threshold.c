@@ -5,7 +5,7 @@
 #include "UnionFind.h"
 #include "Threshold.h"
 
-static void quicksort(double, int);
+static void quicksort(double*, int);
 
 double* thresholdEstimate(size_t N, size_t T)
 {
