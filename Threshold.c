@@ -27,6 +27,9 @@ double* thresholdEstimate(size_t N, size_t T)
 
   for (size_t i = 0; i < T ; i++){
     Percolation* perc = percCreate(N);
+    if(perc == NULL)
+      abort();
+    
     countOpen = 0;
     while(percPercolates(perc) != true){
       do{
@@ -36,7 +39,6 @@ double* thresholdEstimate(size_t N, size_t T)
     
       percOpenCell(perc,randRow,randCol);
       countOpen++;
-      percPercolates(perc);
     }
 
     stats[1] += countOpen / (double)(N*N);
