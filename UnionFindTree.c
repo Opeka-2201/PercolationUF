@@ -14,7 +14,20 @@ struct union_find_t{
   size_t size;
 };
 
-static TreeNode* newNode(size_t,TreeNode*);
+/* ------------------------------------------------------------------------- *
+ * Creates a new TreeNode
+ *
+ * PARAMETERS
+ * nodeIndex      Index for the new node
+ * parent         Parent of the new node
+ *
+ * NOTE
+ * Structure freed in ufFree
+ *
+ * RETURN
+ * toReturn       The created TreeNode structure.
+ * ------------------------------------------------------------------------- */
+static TreeNode* newNode(size_t nodeIndex, TreeNode* parent);
 
 UnionFind* ufCreate(size_t n_items){
   UnionFind* unionFind = malloc(sizeof(UnionFind));

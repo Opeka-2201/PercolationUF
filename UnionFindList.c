@@ -4,8 +4,37 @@
 typedef struct node_t Node;
 typedef struct list_t List;
 
-Node* nodeCreate(List*,Node*,size_t);
-List* listCreate(Node*,Node*,size_t);
+/* ------------------------------------------------------------------------- *
+ * Create a new Node
+ *
+ * PARAMETERS
+ * list           List where the node is stocked
+ * next           Pointer on next node in list
+ * label          node label
+ *
+ * NOTE
+ * used alongside listCreate in ufCreate
+ *
+ * RETURN
+ * toReturn       The created Node structure.
+ * ------------------------------------------------------------------------- */
+static Node* nodeCreate(List* list, Node* next, size_t label);
+
+/* ------------------------------------------------------------------------- *
+ * Create a new linked List
+ *
+ * PARAMETERS
+ * start          List's starting node
+ * tail           List's ending node
+ * length         List's length
+ *
+ * NOTE
+ * Structure freed in ufFree
+ *
+ * RETURN
+ * toReturn       The created List structure.
+ * ------------------------------------------------------------------------- */
+static List* listCreate(Node* start, Node* tail, size_t length);
 
 struct node_t{
   List* list;

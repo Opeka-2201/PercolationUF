@@ -8,7 +8,7 @@ struct percolation_t{
   size_t size;
   UnionFind* unionFind;
   bool** boolMatrix;
-}; // typedef percolation_t -> Percolation in .h
+};
 
 Percolation* percCreate(size_t n){
   Percolation* newPerc = (Percolation*)malloc(sizeof(Percolation));

@@ -5,7 +5,18 @@
 #include "UnionFind.h"
 #include "Threshold.h"
 
-static void quicksort(double*, int);
+/* ------------------------------------------------------------------------- *
+ * Sorts an array of double values using quicksort
+ *
+ * PARAMETERS
+ * a              array to sort
+ * n              size of the array
+ *
+ * NOTE
+ * Pivot choosed in the middle of array
+ * This sort comes from stackoverflow
+ * ------------------------------------------------------------------------- */
+static void quicksort(double* a, size_t n);
 
 double* thresholdEstimate(size_t N, size_t T)
 {
@@ -43,7 +54,7 @@ double* thresholdEstimate(size_t N, size_t T)
   return stats;
 }
 
-static void quicksort(double a[], int n) {
+static void quicksort(double a[],size_t n) {
     if (n <= 1)
       return;
 
@@ -51,7 +62,7 @@ static void quicksort(double a[], int n) {
     double b[n], c[n];
     int j = 0, k = 0;
 
-    for(int i = 0; i < n; i++){
+    for(size_t i = 0; i < n; i++){
         if (i == n/2)
           continue;
         if(a[i] <= p)

@@ -1,0 +1,11 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Analyse Th\IeC {\'e}orique}{1}% 
+\contentsline {subsection}{\numberline {1.1}Description \texttt {UnionFindTree.c}}{1}% 
+\contentsline {subsection}{\numberline {1.2}Complexit\IeC {\'e}s \texttt {ufUnion} et \texttt {ufFind}}{1}% 
+\contentsline {subsection}{\numberline {1.3}Structure \texttt {Percolation.c}}{1}% 
+\contentsline {subsection}{\numberline {1.4}Complexit\IeC {\'e} en temps et espace de \texttt {thresholdEstimate} par listes}{1}% 
+\contentsline {subsection}{\numberline {1.5}Complexit\IeC {\'e} en temps et espace de \texttt {thresholdEstimate} par arbres}{1}% 
+\contentsline {section}{\numberline {2}Analyse Empirique}{2}% 
+\contentsline {subsection}{\numberline {2.1}Centilles et seuil critique de percolation}{2}% 
+\contentsline {subsection}{\numberline {2.2}Temps d'ex\IeC {\'e}cution en fonction de l'impl\IeC {\'e}mentation}{2}% 
+\contentsline {subsection}{\numberline {2.3}Discussion des courbes}{2}% 
