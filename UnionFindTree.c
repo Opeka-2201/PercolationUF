@@ -40,6 +40,8 @@ void ufFree(UnionFind* union_find){
   for(size_t i = 0; i < union_find->size; i++)
     free(union_find->nodes[i]);
 
+  free(union_find->nodes);
+
   free(union_find);
 }
 
