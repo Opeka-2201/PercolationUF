@@ -90,7 +90,7 @@ size_t ufFind(const UnionFind* union_find, size_t item){
 
   TreeNode* copy = tree;
 
-  while(copy->parent != NULL)
+  while(copy->parent != NULL) // path compression
     copy = copy->parent;
 
   tree->parent = copy;
